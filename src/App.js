@@ -9,13 +9,14 @@ function App() {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    console.log("Effect has been run");
+    getRecipes();
   }, []);     // Array is second argument for useEffect. Leaving empty means it runs once,
                 // when the page loads. Adding counter makes it run each time counter is clicked
   
   const getRecipes = async () => {
     const response = await fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`);
-    const data = response.json()
+    const data = await response.json();
+    console.log(data);
   }
   
   return (
