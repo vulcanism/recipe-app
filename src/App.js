@@ -7,7 +7,8 @@ function App() {
   const APP_ID = "749a6121";
   const APP_KEY = "2ec1c0be635d04c9180f2ad885d45764";  
 
-  const [recipes, setRecipes] = useState([]);  
+  const [recipes, setRecipes] = useState([]);
+  const [search, setSearch] = useState("");  
 
   useEffect(() => {
     getRecipes();
@@ -20,11 +21,16 @@ function App() {
     setRecipes(data.hits);
     console.log(data.hits);
   }
+
+  const updateSearch = (event) => {
+    event.preventDefault();
+    setSearch(event.target.value);
+  }
   
   return (
     <div className="App">
       <form className="search-form">
-        <input className="search-bar" type="text" />
+        <input className="search-bar" type="text" value={search} onChange={updateSearch}/>
         <button className="search-button" type="submit">Search</button>
       </form>
       {recipes.map(recipe => (
